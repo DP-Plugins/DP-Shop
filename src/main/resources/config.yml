@@ -1,0 +1,20 @@
+Settings:
+  Prefix: "&f[ &eDP-Shop &f] "
+  Lang: English
+
+  PrevItem:
+    ==: org.bukkit.inventory.ItemStack
+    type: ARROW
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: asd
+    forgeCapNBT: H4sIAAAAAAAAAONiYOBikE4uLS7Jz80rSC62yixJzS1OLsosKElNSUksSWRgAAB/ZFwFIwAAAA==
+  NextItem:
+    ==: org.bukkit.inventory.ItemStack
+    type: ARROW
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: asd
+    forgeCapNBT: H4sIAAAAAAAAAONiYOBikE4uLS7Jz80rSC62yixJzS1OLsosKElNSUksSWRgAAB/ZFwFIwAAAA==
