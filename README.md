@@ -11,6 +11,7 @@ GUI를 통해 직관적으로 아이템과 가격을 설정할 수 있으며, �
 - **상점 활성화/비활성화**: 특정 상점을 필요에 따라 활성화하거나 비활성화 가능.
 - **페이징 기능**: 상점을 여러 페이지로 나누어 관리 가능 (페이지는 0부터 시작).
 - **권한 설정**: 상점별 접근 권한을 설정하거나 삭제 가능.
+- **DLang 지원**: 언어 파일을 자유롭게 수정하실 수 있습니다.
 
 ## 명령어
 | 명령어 | 설명 |
@@ -47,6 +48,7 @@ DP-Shop is a Minecraft plugin that allows for easy creation and management of sh
 - **Shop Enable/Disable**: Activate or deactivate specific shops as needed.
 - **Pagination**: Organize shops across multiple pages (pages start from 0).
 - **Permission Settings**: Set or remove access permissions for individual shops.
+- **DLang Support**: You can freely edit language files.
 
 ## Commands
 | Command | Description |
