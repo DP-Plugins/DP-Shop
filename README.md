@@ -36,7 +36,7 @@ GUI를 통해 직관적으로 아이템과 가격을 설정할 수 있으며, �
 - 상점 열기: `/dshop open myshop`
 </details>
 
-<details>
+<details open>
 	<summary>english</summary>
 	
 # DP-Shop Plugin Introduction
