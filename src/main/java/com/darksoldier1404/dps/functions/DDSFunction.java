@@ -298,22 +298,24 @@ public class DDSFunction {
                     final List<String> lore = im.hasLore() ? im.getLore() : new ArrayList<>();
                     lore.add("");
                     lore.add("");
-                    lore.add(ColorUtils.applyColor("&bLeft-Click: &fBuy &a| &bShift-Click: &fSet buy"));
+                    lore.add(ColorUtils.applyColor(plugin.lang.get("left_click_info")));
                     final double buyPrice = shop.getDouble("Shop.Price." + spage + "." + key + ".BuyPrice");
                     if (buyPrice == 0.0) {
-                        lore.add(ColorUtils.applyColor("&bBuy Price : &cBuy Disabled"));
-                    }
-                    else {
-                        lore.add(ColorUtils.applyColor("&bBuy Price : &f" + shop.getInt("Shop.Price." + spage + "." + key + ".BuyPrice") + " &f(&eStack &f: &6" + shop.getInt("Shop.Price." + spage + "." + key + ".BuyPrice") * item.getMaxStackSize() + "&f)"));
+                        lore.add(ColorUtils.applyColor(plugin.lang.get("buy_price_disabled")));
+                    } else {
+                        int buyPriceInt = shop.getInt("Shop.Price." + spage + "." + key + ".BuyPrice");
+                        int stackPrice = buyPriceInt * item.getMaxStackSize();
+                        lore.add(ColorUtils.applyColor(plugin.lang.getWithArgs("buy_price_enabled", String.valueOf(buyPriceInt), String.valueOf(stackPrice))));
                     }
                     lore.add("");
-                    lore.add(ColorUtils.applyColor("&bRight-Click: &fSell &a| &bShift-Right-Click: &fSet sell"));
+                    lore.add(ColorUtils.applyColor(plugin.lang.get("right_click_info")));
                     final double sellPrice = shop.getDouble("Shop.Price." + spage + "." + key + ".SellPrice");
                     if (sellPrice == 0.0) {
-                        lore.add(ColorUtils.applyColor("&bSell Price : &cSell Disabled"));
-                    }
-                    else {
-                        lore.add(ColorUtils.applyColor("&bSell Price : &f" + shop.getInt("Shop.Price." + spage + "." + key + ".SellPrice") + " &f(&eStack &f: &6" + shop.getInt("Shop.Price." + spage + "." + key + ".SellPrice") * item.getMaxStackSize() + "&f)"));
+                        lore.add(ColorUtils.applyColor(plugin.lang.get("sell_price_disabled")));
+                    } else {
+                        int sellPriceInt = shop.getInt("Shop.Price." + spage + "." + key + ".SellPrice");
+                        int stackPrice = sellPriceInt * item.getMaxStackSize();
+                        lore.add(ColorUtils.applyColor(plugin.lang.getWithArgs("sell_price_enabled", String.valueOf(sellPriceInt), String.valueOf(stackPrice))));
                     }
                     im.setLore(lore);
                     item.setItemMeta(im);
