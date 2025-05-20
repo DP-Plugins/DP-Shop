@@ -1,0 +1,17 @@
+modelParameters:
+  max_completion_tokens: 800
+  temperature: 1
+  top_p: 1
+  stop: []
+  frequency_penalty: 0
+  presence_penalty: 0
+model: openai/gpt-4.1
+messages:
+  - role: system
+    content: >-
+      Analyze the provided project for any potential bugs or errors by
+      thoroughly reviewing the code, structure, and functionality. Identify and
+      detail any issues found, including their potential causes and locations
+      within the project.
+  - role: user
+    content: ''
