@@ -1,6 +1,5 @@
 package com.darksoldier1404.dps.commands;
 
-import com.darksoldier1404.dppc.action.helper.ActionGUI;
 import com.darksoldier1404.dppc.lang.DLang;
 import com.darksoldier1404.dps.Shop;
 import com.darksoldier1404.dps.functions.DDSFunction;
@@ -27,6 +26,7 @@ public class DDSCommand implements CommandExecutor, TabExecutor {
             if (p.isOp()) {
                 p.sendMessage(prefix + lang.get("help_create"));
                 p.sendMessage(prefix + lang.get("help_pages"));
+                p.sendMessage(prefix + lang.get("help_pt"));
                 p.sendMessage(prefix + lang.get("help_title"));
                 p.sendMessage(prefix + lang.get("help_items"));
                 p.sendMessage(prefix + lang.get("page_start_zero"));
@@ -48,6 +48,14 @@ public class DDSCommand implements CommandExecutor, TabExecutor {
                     return false;
                 }
                 DDSFunction.createShop(p, args[1]);
+                return false;
+            }
+            if( args[0].equalsIgnoreCase("ptget")) {
+                DDSFunction.giveDefaultPageTools(p);
+                return false;
+            }
+            if( args[0].equalsIgnoreCase("pt")) {
+                DDSFunction.openPageToolSetting(p);
                 return false;
             }
             if( args[0].equalsIgnoreCase("title")) {
@@ -153,7 +161,7 @@ public class DDSCommand implements CommandExecutor, TabExecutor {
     public List<String> onTabComplete(final CommandSender sender, final Command command, final String label, final String[] args) {
         if (args.length == 1) {
             if (sender.isOp()) {
-                return Arrays.asList("create", "title", "items", "price", "disable", "enable", "delete", "open", "reload", "permission", "delpermission", "pages");
+                return Arrays.asList("create", "ptget", "pt", "title", "items", "price", "disable", "enable", "delete", "open", "reload", "permission", "delpermission", "pages");
             }
             return Arrays.asList("open");
         } else {

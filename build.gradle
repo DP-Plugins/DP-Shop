@@ -79,6 +79,7 @@ repositories {
         url "http://nexus.dpnw.site:8081/repository/maven-public/"
         allowInsecureProtocol = true
     }
+    maven { url 'https://repo.extendedclip.com/releases/' }
 }
 
 dependencies {
@@ -88,4 +89,5 @@ dependencies {
     compileOnly "com.bukkit:craftbukkit:1.14.4"
     compileOnly "com.bukkit:spigot:1.14.4"
     compileOnly "com.darksoldier1404.dppc:DPP-Core:1_14_4-SNAPSHOT"
+    compileOnly 'me.clip:placeholderapi:2.11.6'
 }
