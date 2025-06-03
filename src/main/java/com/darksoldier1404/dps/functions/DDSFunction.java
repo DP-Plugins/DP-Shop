@@ -1,17 +1,22 @@
 package com.darksoldier1404.dps.functions;
 
 import com.darksoldier1404.dppc.api.essentials.MoneyAPI;
+import com.darksoldier1404.dppc.api.placeholder.PlaceholderBuilder;
 import com.darksoldier1404.dppc.lang.DLang;
 import com.darksoldier1404.dps.Shop;
 import com.darksoldier1404.dps.enums.SettingType;
+import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.configuration.file.*;
 import org.bukkit.entity.*;
 import com.darksoldier1404.dppc.api.inventory.*;
 import com.darksoldier1404.dppc.utils.*;
 import org.bukkit.inventory.meta.*;
 import org.bukkit.*;
+
 import java.io.*;
+
 import org.bukkit.inventory.*;
+import org.jetbrains.annotations.Nullable;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -79,8 +84,8 @@ public class DDSFunction {
         }
         final YamlConfiguration shop = Shop.shops.get(name);
         final DInventory inv = Shop.currentInv.get(p.getUniqueId());
-        final Triple<SettingType, String, Integer> obj = (Triple<SettingType, String, Integer>)inv.getObj();
-        if (obj == null || obj.getA() != SettingType.SETTING_ITEMS || !((String)obj.getB()).equals(name)) {
+        final Triple<SettingType, String, Integer> obj = (Triple<SettingType, String, Integer>) inv.getObj();
+        if (obj == null || obj.getA() != SettingType.SETTING_ITEMS || !((String) obj.getB()).equals(name)) {
             p.sendMessage(prefix + plugin.lang.get("wrong_inventory"));
             return;
         }
@@ -88,8 +93,7 @@ public class DDSFunction {
         for (int i = 0; i < 54; ++i) {
             if (inv.getItem(i) != null) {
                 shop.set("Shop.Items." + page + "." + i, inv.getItem(i));
-            }
-            else {
+            } else {
                 shop.set("Shop.Items." + page + "." + i, null);
             }
         }
@@ -119,8 +123,7 @@ public class DDSFunction {
                         item.setItemMeta(im);
                         inv.setItem(Integer.parseInt(key), item);
                         pageContent.put(Integer.parseInt(key), item);
-                    }
-                    else if (NBT.hasTagKey(item, "dlss_page")) {
+                    } else if (NBT.hasTagKey(item, "dlss_page")) {
                         final ItemMeta im = item.getItemMeta();
                         final List<String> lore = im.hasLore() ? im.getLore() : new ArrayList<>();
                         int index = 0;
@@ -136,23 +139,19 @@ public class DDSFunction {
                         item.setItemMeta(im);
                         inv.setItem(Integer.parseInt(key), item);
                         pageContent.put(Integer.parseInt(key), item);
-                    }
-                    else if (NBT.hasTagKey(item, "dlss_prev")) {
+                    } else if (NBT.hasTagKey(item, "dlss_prev")) {
                         inv.setItem(Integer.parseInt(key), item);
                         pageContent.put(Integer.parseInt(key), item);
-                    }
-                    else if (NBT.hasTagKey(item, "dlss_next")) {
+                    } else if (NBT.hasTagKey(item, "dlss_next")) {
                         inv.setItem(Integer.parseInt(key), item);
                         pageContent.put(Integer.parseInt(key), item);
-                    }
-                    else {
+                    } else {
                         final ItemMeta im = item.getItemMeta();
                         final List<String> lore = im.hasLore() ? im.getLore() : new ArrayList<String>();
                         lore.add("");
                         if (shop.contains("Shop.Price." + spage + "." + key + ".BuyPrice")) {
                             lore.add(ColorUtils.applyColor("&bBuy Price : &f" + shop.getInt("Shop.Price." + spage + "." + key + ".BuyPrice")));
-                        }
-                        else {
+                        } else {
                             final double price = shop.getDouble("Shop.Price." + spage + "." + key + ".BuyPrice");
                             if (price == 0.0) {
                                 lore.add(ColorUtils.applyColor("&bBuy Price : &cBuy Disabled"));
@@ -160,8 +159,7 @@ public class DDSFunction {
                         }
                         if (shop.contains("Shop.Price." + spage + "." + key + ".SellPrice")) {
                             lore.add(ColorUtils.applyColor("&bSell Price : &f" + shop.getInt("Shop.Price." + spage + "." + key + ".SellPrice")));
-                        }
-                        else {
+                        } else {
                             final double price = shop.getDouble("Shop.Price." + spage + "." + key + ".SellPrice");
                             if (price == 0.0) {
                                 lore.add(ColorUtils.applyColor("&bSell Price : &cSell Disabled"));
@@ -188,9 +186,7 @@ public class DDSFunction {
             contents = new ItemStack[54];
         }
         inv.setUsePageTools(true);
-        final ItemStack[] preTools = getPageTools();
-        final ItemStack[] tools = { preTools[0], preTools[3], preTools[3], preTools[3], preTools[2], preTools[3], preTools[3], preTools[3], preTools[1] };
-        inv.setPageTools(tools);
+        inv.setPageTools(getPageTools(p));
         inv.setCurrentPage(prevPage);
         inv.update();
         p.openInventory(inv);
@@ -212,16 +208,14 @@ public class DDSFunction {
         }
         final YamlConfiguration shop = Shop.shops.get(name);
         if (buyPrice == 0.0) {
-            shop.set("Shop.Price." + page + "." + slot + ".BuyPrice", (Object)null);
-        }
-        else {
-            shop.set("Shop.Price." + page + "." + slot + ".BuyPrice", (Object)buyPrice);
+            shop.set("Shop.Price." + page + "." + slot + ".BuyPrice", (Object) null);
+        } else {
+            shop.set("Shop.Price." + page + "." + slot + ".BuyPrice", (Object) buyPrice);
         }
         if (sellPrice == 0.0) {
-            shop.set("Shop.Price." + page + "." + slot + ".SellPrice", (Object)null);
-        }
-        else {
-            shop.set("Shop.Price." + page + "." + slot + ".SellPrice", (Object)sellPrice);
+            shop.set("Shop.Price." + page + "." + slot + ".SellPrice", (Object) null);
+        } else {
+            shop.set("Shop.Price." + page + "." + slot + ".SellPrice", (Object) sellPrice);
         }
         ConfigUtils.saveCustomData(plugin, shop, name, "shops");
         p.sendMessage(prefix + name + plugin.lang.get("price_set_success"));
@@ -237,33 +231,12 @@ public class DDSFunction {
             final YamlConfiguration shop = Shop.shops.get(name);
             ConfigUtils.saveCustomData(plugin, shop, name, "shops");
         }
+        ConfigUtils.savePluginConfig(plugin, plugin.config);
     }
 
     public static void updatePageTools(final DInventory inv, final Player p) {
-        final ItemStack[] tools = inv.getPageTools();
-        final ItemStack item = tools[4].clone();
+        inv.setPageTools(getPageTools(p));
         inv.update();
-        final int page = inv.getCurrentPage();
-        String displayName = item.getItemMeta().hasDisplayName() ? item.getItemMeta().getDisplayName() : ("§a" + page + " Page");
-        displayName = displayName.replace("<currentPage>", String.valueOf(page + 1));
-        displayName = displayName.replace("<maxPage>", String.valueOf(inv.getPages() + 1));
-        final ItemMeta im = item.getItemMeta();
-        final List<String> lore = im.hasLore() ? im.getLore() : new ArrayList<>();
-        int index = 0;
-        for (String s : lore) {
-            if (s.contains("<currentMoney>")) {
-                s = s.replace("<currentMoney>", String.valueOf(getMoney(p)));
-                lore.set(index, s);
-            }
-            ++index;
-        }
-        im.setLore(lore);
-        im.setDisplayName(displayName);
-        item.setItemMeta(im);
-        tools[4] = item;
-        inv.setPageTools(tools);
-        inv.update();
-        p.updateInventory();
     }
 
     public static void openShop(final Player p, final String name) {
@@ -271,9 +244,13 @@ public class DDSFunction {
             p.sendMessage(prefix + plugin.lang.get("shop_not_exist"));
             return;
         }
+        if (getPageTools(p) == null) {
+            p.sendMessage(prefix + "page tool is empty, please set the page tools");
+            return;
+        }
         final YamlConfiguration shop = Shop.shops.get(name);
-        if(shop.isSet("Shop.Permission")) {
-            if(!p.hasPermission(shop.getString("Shop.Permission"))) {
+        if (shop.isSet("Shop.Permission")) {
+            if (!p.hasPermission(shop.getString("Shop.Permission"))) {
                 p.sendMessage(prefix + plugin.lang.get("no_shop_permission"));
                 return;
             }
@@ -283,7 +260,7 @@ public class DDSFunction {
             return;
         }
         String title = null;
-        if(shop.get("Shop.Title") != null) {
+        if (shop.get("Shop.Title") != null) {
             title = ColorUtils.applyColor(shop.getString("Shop.Title"));
         }
         final DInventory inv = new DInventory(null, title != null ? title : name + " Shop", 54, true, plugin);
@@ -337,11 +314,8 @@ public class DDSFunction {
             contents = new ItemStack[54];
         }
         inv.setUsePageTools(true);
-        final ItemStack[] preTools = getPageTools();
-        final ItemStack[] tools = { preTools[0], preTools[3], preTools[3], preTools[3], preTools[2], preTools[3], preTools[3], preTools[3], preTools[1] };
-        inv.setPageTools(tools);
+        inv.setPageTools(getPageTools(p));
         inv.setCurrentPage(0);
-        inv.update();
         p.openInventory(inv);
         Shop.currentInv.put(p.getUniqueId(), inv);
         updatePageTools(inv, p);
@@ -402,7 +376,6 @@ public class DDSFunction {
             return;
         }
 
-        // 아이템을 여러 스택으로 나눠서 추가
         int remaining = amount;
         while (remaining > 0) {
             int toGive = Math.min(remaining, maxStack);
@@ -419,14 +392,12 @@ public class DDSFunction {
         takeMoney(p, totalPrice);
         p.sendMessage(prefix + plugin.lang.get("item_purchased"));
         p.sendMessage(prefix + plugin.lang.get("balance_label") + getMoney(p));
-
-        inv.update();
         updatePageTools(inv, p);
     }
 
     public static void sellItem(final Player p, final int slot, final int amount) {
         final DInventory inv = Shop.currentInv.get(p.getUniqueId());
-        final Triple<SettingType, String, Integer> obj = (Triple<SettingType, String, Integer>)inv.getObj();
+        final Triple<SettingType, String, Integer> obj = (Triple<SettingType, String, Integer>) inv.getObj();
         if (obj.getA() != SettingType.DISPLAY_ITEMS) {
             return;
         }
@@ -462,7 +433,7 @@ public class DDSFunction {
 
     public static void sellAllItems(final Player p, int slot) {
         final DInventory inv = Shop.currentInv.get(p.getUniqueId());
-        final Triple<SettingType, String, Integer> obj = (Triple<SettingType, String, Integer>)inv.getObj();
+        final Triple<SettingType, String, Integer> obj = (Triple<SettingType, String, Integer>) inv.getObj();
         if (obj.getA() != SettingType.DISPLAY_ITEMS) {
             return;
         }
@@ -567,35 +538,6 @@ public class DDSFunction {
         return MoneyAPI.getMoney(p);
     }
 
-    public static ItemStack[] getPageTools() {
-        ItemStack prev = Shop.config.getItemStack("Settings.PrevItem");
-        final ItemMeta prevm = prev.getItemMeta();
-        prevm.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-        prevm.setDisplayName("§aPrevious Page");
-        prev.setItemMeta(prevm);
-        prev = NBT.setStringTag(prev, "dlss_prev", "true");
-        ItemStack next = Shop.config.getItemStack("Settings.NextItem");
-        final ItemMeta nextm = next.getItemMeta();
-        nextm.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-        nextm.setDisplayName("§bNext Page");
-        next.setItemMeta(nextm);
-        next = NBT.setStringTag(next, "dlss_next", "true");
-        ItemStack page = new ItemStack(Material.PAPER);
-        final ItemMeta pagem = page.getItemMeta();
-        pagem.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-        pagem.setDisplayName("§f");
-        pagem.setLore(Arrays.asList("§f", "§eCurrent Balance: §b<currentMoney>"));
-        page.setItemMeta(pagem);
-        page = NBT.setStringTag(page, "dlss_page", "true");
-        ItemStack glass = new ItemStack(Material.GLASS_PANE, 1, (short)7);
-        final ItemMeta glassm = glass.getItemMeta();
-        glassm.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-        glassm.setDisplayName("§f");
-        glass.setItemMeta(glassm);
-        glass = NBT.setStringTag(glass, "dlss_display", "true");
-        return new ItemStack[] { prev, next, page, glass };
-    }
-
     public static void setMaxPage(final Player p, final String arg, final int page) {
         if (!Shop.shops.containsKey(arg)) {
             p.sendMessage(prefix + plugin.lang.get("shop_not_exist"));
@@ -645,5 +587,76 @@ public class DDSFunction {
         shop.set("Shop.Title", title);
         saveAllShops();
         p.sendMessage(prefix + name + plugin.lang.get("title_set") + title);
+    }
+
+    public static void openPageToolSetting(Player p) {
+        DInventory inv = new DInventory(null, "Page Tool Settings", 9, plugin);
+        inv.setObj(Triple.of(SettingType.SETTING_PT, "global", 0));
+        if (Shop.config.isSet("Settings.PT")) {
+            for (String key : Shop.config.getConfigurationSection("Settings.PT").getKeys(false)) {
+                ItemStack item = Shop.config.getItemStack("Settings.PT." + key);
+                inv.setItem(Integer.parseInt(key), item);
+            }
+        }
+        Shop.currentInv.put(p.getUniqueId(), inv);
+        p.openInventory(inv);
+    }
+
+    public static void savePageTool(Player p, DInventory inv, String name) {
+        for (int i = 0; i < 9; i++) {
+            Shop.config.set("Settings.PT." + i, inv.getItem(i));
+        }
+        Shop.currentInv.remove(p.getUniqueId());
+        ConfigUtils.savePluginConfig(plugin, plugin.config);
+    }
+
+    @Nullable
+    public static ItemStack[] getPageTools(Player p) {
+        if (Shop.config.isSet("Settings.PT")) {
+            ItemStack[] pt = new ItemStack[9];
+            for (String key : Shop.config.getConfigurationSection("Settings.PT").getKeys(false)) {
+                ItemStack item = Shop.config.getItemStack("Settings.PT." + key).clone();
+                if (item.hasItemMeta()) {
+                    ItemMeta im = item.getItemMeta();
+                    im.setDisplayName(PlaceholderAPI.setPlaceholders(p, im.getDisplayName()));
+                    List<String> lore = im.hasLore() ? im.getLore() : new ArrayList<>();
+                    im.setLore(PlaceholderAPI.setPlaceholders(p, lore));
+                    item.setItemMeta(im);
+                }
+                pt[Integer.parseInt(key)] = item;
+            }
+            return pt;
+        }
+        return null;
+    }
+
+    public static void giveDefaultPageTools(Player p) {
+        ItemStack prev = new ItemStack(Material.ARROW);
+        final ItemMeta prevm = prev.getItemMeta();
+        prevm.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        prevm.setDisplayName("§aPrevious Page");
+        prev.setItemMeta(prevm);
+        prev = NBT.setStringTag(prev, "dlss_prev", "true");
+        ItemStack next = new ItemStack(Material.ARROW);
+        final ItemMeta nextm = next.getItemMeta();
+        nextm.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        nextm.setDisplayName("§bNext Page");
+        next.setItemMeta(nextm);
+        next = NBT.setStringTag(next, "dlss_next", "true");
+        ItemStack page = new ItemStack(Material.PAPER);
+        final ItemMeta pagem = page.getItemMeta();
+        pagem.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        pagem.setDisplayName("§f");
+        pagem.setLore(Arrays.asList("§f", "§eCurrent Balance: §b%vault_eco_balance%"));
+        page.setItemMeta(pagem);
+        page = NBT.setStringTag(page, "dlss_page", "true");
+        ItemStack glass = new ItemStack(Material.GLASS_PANE, 1, (short) 7);
+        final ItemMeta glassm = glass.getItemMeta();
+        glassm.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        glassm.setDisplayName("§f");
+        glass.setItemMeta(glassm);
+        glass = NBT.setStringTag(glass, "dlss_display", "true");
+        p.getInventory().addItem(prev, next, page, glass);
+        p.sendMessage(prefix + "you received default page tools, you can edit the item type, name, lore.");
     }
 }

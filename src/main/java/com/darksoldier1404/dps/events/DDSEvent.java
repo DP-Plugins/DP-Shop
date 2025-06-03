@@ -30,6 +30,10 @@ public class DDSEvent implements Listener {
                 DDSFunction.saveShopItems(p, obj.b);
                 break;
             }
+            case SETTING_PT: {
+                DDSFunction.savePageTool(p, Shop.currentInv.get(p.getUniqueId()), obj.b);
+                break;
+            }
             case SETTING_PRICE:
             case DISPLAY_ITEMS: {
                 Shop.currentInv.remove(p.getUniqueId());

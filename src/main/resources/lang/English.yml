@@ -3,6 +3,8 @@ Lang: English
 # Commands
 player_only: "this command is player only command."
 help_create: "/dshop create <name> - create shop"
+help_ptget: "/dshop ptget - get page tool items."
+help_pt: "/dshop pt - open page tool setting GUI"
 help_title: "/dshop title <name> <title> - set shop title"
 help_pages: "/dshop pages <name> <maxPage> - set max page of shop"
 help_items: "/dshop items <name> (page) - open item setting GUI"

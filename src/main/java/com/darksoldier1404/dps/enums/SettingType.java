@@ -4,5 +4,6 @@ public enum SettingType
 {
     SETTING_ITEMS,
     SETTING_PRICE,
-    DISPLAY_ITEMS;
+    DISPLAY_ITEMS,
+    SETTING_PT;
 }
