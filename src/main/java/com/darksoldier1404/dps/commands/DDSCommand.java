@@ -25,8 +25,9 @@ public class DDSCommand implements CommandExecutor, TabExecutor {
         if (args.length == 0) {
             if (p.isOp()) {
                 p.sendMessage(prefix + lang.get("help_create"));
-                p.sendMessage(prefix + lang.get("help_pages"));
+                p.sendMessage(prefix + lang.get("help_ptget"));
                 p.sendMessage(prefix + lang.get("help_pt"));
+                p.sendMessage(prefix + lang.get("help_pages"));
                 p.sendMessage(prefix + lang.get("help_title"));
                 p.sendMessage(prefix + lang.get("help_items"));
                 p.sendMessage(prefix + lang.get("page_start_zero"));

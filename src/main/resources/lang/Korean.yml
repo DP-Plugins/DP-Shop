@@ -3,6 +3,8 @@ Lang: Korean
 # Commands
 player_only: "이 명령어는 플레이어만 사용할 수 있습니다."
 help_create: "/dshop create <name> - 상점을 생성합니다"
+help_ptget: "/dshop ptget - 페이지 툴 아이템을 받습니다."
+help_pt: "/dshop pt - 페이지 툴 설정 GUI를 엽니다."
 help_title: "/dshop title <name> <title> - 상점의 제목을 설정합니다"
 help_pages: "/dshop pages <name> <maxPage> - 상점의 최대 페이지를 설정합니다"
 help_items: "/dshop items <name> (page) - 아이템 설정 GUI를 엽니다"
