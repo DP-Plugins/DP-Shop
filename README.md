@@ -1,8 +1,27 @@
+![](https://dpnw.site/assets/img/logo_white.png)
+
+![](https://dpnw.site/assets/img/desc_card/dppcore.jpg)
+
+# ALL DP-Plugins depend on the [DPP-Core](https://dpnw.site/plugin.html?plugin=DPP-Core) plugin. <br>Please make sure to install [DPP-Core](https://dpnw.site/plugin.html?plugin=DPP-Core). </h1>
+
+# Discord
+### Join our Discord server to get support and stay updated with the latest news and updates.
+
+### if any questions or suggestions, please join our Discord server.
+
+### if you find any bugs, please report them using inquiry channel.
+
+<span style="font-size: 18px;">**Discord Invite : https://discord.gg/JnMCqkn2FX**</span>
+
+<br>
+<br>
+
 <details>
 	<summary>korean</summary>
-	
-# DP-Shop 플러그인 소개
 
+![](https://dpnw.site/assets/img/desc_card/desc.jpg)
+
+# DP-Shop 플러그인 소개
 DP-Shop은 마인크래프트 서버에서 상점을 쉽게 생성하고 관리할 수 있는 플러그인입니다.
 GUI를 통해 직관적으로 아이템과 가격을 설정할 수 있으며, 상점의 활성화/비활성화 및 페이징 기능을 지원합니다.
 
@@ -12,6 +31,11 @@ GUI를 통해 직관적으로 아이템과 가격을 설정할 수 있으며, �
 - **페이징 기능**: 상점을 여러 페이지로 나누어 관리 가능 (페이지는 0부터 시작).
 - **권한 설정**: 상점별 접근 권한을 설정하거나 삭제 가능.
 - **DLang 지원**: 언어 파일을 자유롭게 수정하실 수 있습니다.
+
+<br>
+<br>
+
+![](https://dpnw.site/assets/img/desc_card/cmd-perm.jpg)
 
 ## 명령어
 | 명령어 | 설명 |
@@ -38,7 +62,9 @@ GUI를 통해 직관적으로 아이템과 가격을 설정할 수 있으며, �
 
 <details open>
 	<summary>english</summary>
-	
+
+![](https://dpnw.site/assets/img/desc_card/desc.jpg)
+
 # DP-Shop Plugin Introduction
 
 DP-Shop is a Minecraft plugin that allows for easy creation and management of shops on servers. It offers intuitive item and price configuration through a GUI, along with features for enabling/disabling shops and pagination.
@@ -49,6 +75,11 @@ DP-Shop is a Minecraft plugin that allows for easy creation and management of sh
 - **Pagination**: Organize shops across multiple pages (pages start from 0).
 - **Permission Settings**: Set or remove access permissions for individual shops.
 - **DLang Support**: You can freely edit language files.
+
+<br>
+<br>
+
+![](https://dpnw.site/assets/img/desc_card/cmd-perm.jpg)
 
 ## Commands
 | Command | Description |
@@ -72,3 +103,12 @@ DP-Shop is a Minecraft plugin that allows for easy creation and management of sh
 - Open item configuration GUI: `/dshop items myshop 0`
 - Open a shop: `/dshop open myshop`
 </details>
+
+<br>
+<br>
+
+![](https://dpnw.site/assets/img/desc_card/screenshot.jpg)
+
+![](https://dpnw.site/assets/img/screenshot/DP-Shop/1.jpg)
+
+![](https://dpnw.site/assets/img/screenshot/DP-Shop/2.jpg)
