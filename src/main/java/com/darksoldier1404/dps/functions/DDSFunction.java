@@ -108,6 +108,10 @@ public class DDSFunction {
             p.sendMessage(prefix + plugin.lang.get("shop_not_exist"));
             return;
         }
+        if (getPageTools(p) == null) {
+            p.sendMessage(prefix + "page tools is not set, [ /dshop ptget -> /dshop pt ] use this commands to set page tools.");
+            return;
+        }
         final YamlConfiguration shop = Shop.shops.get(name);
         final DInventory inv = new DInventory(null, name + " shop price setting", 54, true, plugin);
         inv.setObj(Triple.of(SettingType.SETTING_PRICE, name, 0));
@@ -245,7 +249,7 @@ public class DDSFunction {
             return;
         }
         if (getPageTools(p) == null) {
-            p.sendMessage(prefix + "page tool is empty, please set the page tools");
+            p.sendMessage(prefix + "page tools is not set, [ /dshop ptget -> /dshop pt ] use this commands to set page tools.");
             return;
         }
         final YamlConfiguration shop = Shop.shops.get(name);

@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.darksoldier1404'
-version = '1.0.1.6'
+version = '1.0.1.7'
 compileJava.options.encoding = 'UTF-8'
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
