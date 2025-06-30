@@ -15,7 +15,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           distribution: temurin
-          java-version: 17
+          java-version: 21
 
       - name: Configure Git
         run: |
@@ -28,6 +28,9 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Execute Gradle build
+        env:
+          REPO_PUBLIC: ${{ secrets.REPO_PUBLIC }}
+          REPO_DPP: ${{ secrets.REPO_DPP }}
         run: ./gradlew jar
 
       - name: Run read-yaml action
