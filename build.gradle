@@ -4,7 +4,16 @@ plugins {
 }
 
 group 'com.darksoldier1404'
-version = '1.0.1.7'
+
+// ##################################################
+
+version = '1.0.1.8'
+var pluginName = 'DP-Shop'
+var packageName = 'com.darksoldier1404.dps'
+var apiVersion = '1.14.4'
+
+// ##################################################
+
 compileJava.options.encoding = 'UTF-8'
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
@@ -18,15 +27,15 @@ jar {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            groupId = 'com.darksoldier1404.dps'
-            artifactId = 'DP-Shop'
-            artifact 'jars/'+ "DP-Shop-${version}-SNAPSHOT.jar"
+            groupId = packageName
+            artifactId = pluginName
+            artifact 'jars/'+ pluginName + "-${version}-SNAPSHOT.jar"
             version = "Main-SNAPSHOT"
         }
     }
     repositories {
         maven {
-            url "http://nexus.dpnw.site:8081/repository/dpp/"
+            url System.getenv("REPO_DPP") ?: getProperty("REPO_DPP")
             allowInsecureProtocol = true
         }
     }
@@ -76,7 +85,7 @@ task DS_BUILD {
 repositories {
     mavenCentral()
     maven {
-        url "http://nexus.dpnw.site:8081/repository/maven-public/"
+        url System.getenv("REPO_PUBLIC") ?: getProperty("REPO_PUBLIC")
         allowInsecureProtocol = true
     }
     maven { url 'https://repo.extendedclip.com/releases/' }
@@ -86,8 +95,8 @@ dependencies {
     implementation 'org.jetbrains:annotations:23.0.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
-    compileOnly "com.bukkit:craftbukkit:1.14.4"
-    compileOnly "com.bukkit:spigot:1.14.4"
-    compileOnly "com.darksoldier1404.dppc:DPP-Core:1_14_4-SNAPSHOT"
+    compileOnly "com.bukkit:craftbukkit:" + apiVersion
+    compileOnly "com.bukkit:spigot:" + apiVersion
+    compileOnly "com.darksoldier1404.dppc:DPP-Core:4-SNAPSHOT"
     compileOnly 'me.clip:placeholderapi:2.11.6'
 }
