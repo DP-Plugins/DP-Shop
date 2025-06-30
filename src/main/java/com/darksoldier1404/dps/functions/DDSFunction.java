@@ -1,7 +1,6 @@
 package com.darksoldier1404.dps.functions;
 
 import com.darksoldier1404.dppc.api.essentials.MoneyAPI;
-import com.darksoldier1404.dppc.api.placeholder.PlaceholderBuilder;
 import com.darksoldier1404.dppc.lang.DLang;
 import com.darksoldier1404.dps.Shop;
 import com.darksoldier1404.dps.enums.SettingType;
@@ -66,14 +65,14 @@ public class DDSFunction {
             return;
         }
         final YamlConfiguration shop = Shop.shops.get(name);
-        final DInventory inv = new DInventory(null, name + " Shop item setting (Page : " + page + ")", 54, false, plugin);
+        final DInventory inv = new DInventory( name + " Shop item setting (Page : " + page + ")", 54, false, plugin);
         inv.setObj(Triple.of(SettingType.SETTING_ITEMS, name, page));
         if (shop.getConfigurationSection("Shop.Items." + page) != null) {
             for (final String key : shop.getConfigurationSection("Shop.Items." + page).getKeys(false)) {
                 inv.setItem(Integer.parseInt(key), shop.getItemStack("Shop.Items." + page + "." + key));
             }
         }
-        p.openInventory(inv);
+        p.openInventory(inv.getInventory());
         Shop.currentInv.put(p.getUniqueId(), inv);
     }
 
@@ -113,7 +112,7 @@ public class DDSFunction {
             return;
         }
         final YamlConfiguration shop = Shop.shops.get(name);
-        final DInventory inv = new DInventory(null, name + " shop price setting", 54, true, plugin);
+        final DInventory inv = new DInventory( name + " shop price setting", 54, true, plugin);
         inv.setObj(Triple.of(SettingType.SETTING_PRICE, name, 0));
         final Map<Integer, Map<Integer, ItemStack>> items = new HashMap<>();
         if (shop.getConfigurationSection("Shop.Items") != null) {
@@ -193,7 +192,7 @@ public class DDSFunction {
         inv.setPageTools(getPageTools(p));
         inv.setCurrentPage(prevPage);
         inv.update();
-        p.openInventory(inv);
+        p.openInventory(inv.getInventory());
         Shop.currentInv.put(p.getUniqueId(), inv);
     }
 
@@ -267,7 +266,7 @@ public class DDSFunction {
         if (shop.get("Shop.Title") != null) {
             title = ColorUtils.applyColor(shop.getString("Shop.Title"));
         }
-        final DInventory inv = new DInventory(null, title != null ? title : name + " Shop", 54, true, plugin);
+        final DInventory inv = new DInventory( title != null ? title : name + " Shop", 54, true, plugin);
         inv.setObj(Triple.of(SettingType.DISPLAY_ITEMS, name, 0));
         final Map<Integer, Map<Integer, ItemStack>> items = new HashMap<>();
         if (shop.getConfigurationSection("Shop.Items") != null) {
@@ -320,7 +319,7 @@ public class DDSFunction {
         inv.setUsePageTools(true);
         inv.setPageTools(getPageTools(p));
         inv.setCurrentPage(0);
-        p.openInventory(inv);
+        p.openInventory(inv.getInventory());
         Shop.currentInv.put(p.getUniqueId(), inv);
         updatePageTools(inv, p);
     }
@@ -594,7 +593,7 @@ public class DDSFunction {
     }
 
     public static void openPageToolSetting(Player p) {
-        DInventory inv = new DInventory(null, "Page Tool Settings", 9, plugin);
+        DInventory inv = new DInventory( "Page Tool Settings", 9, plugin);
         inv.setObj(Triple.of(SettingType.SETTING_PT, "global", 0));
         if (Shop.config.isSet("Settings.PT")) {
             for (String key : Shop.config.getConfigurationSection("Settings.PT").getKeys(false)) {
@@ -603,7 +602,7 @@ public class DDSFunction {
             }
         }
         Shop.currentInv.put(p.getUniqueId(), inv);
-        p.openInventory(inv);
+        p.openInventory(inv.getInventory());
     }
 
     public static void savePageTool(Player p, DInventory inv, String name) {
