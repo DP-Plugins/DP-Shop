@@ -1,10 +1,10 @@
 package com.darksoldier1404.dps.functions;
 
 import com.darksoldier1404.dppc.api.essentials.MoneyAPI;
+import com.darksoldier1404.dppc.api.placeholder.PlaceholderUtils;
 import com.darksoldier1404.dppc.lang.DLang;
 import com.darksoldier1404.dps.Shop;
 import com.darksoldier1404.dps.enums.SettingType;
-import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.configuration.file.*;
 import org.bukkit.entity.*;
 import com.darksoldier1404.dppc.api.inventory.*;
@@ -621,9 +621,11 @@ public class DDSFunction {
                 ItemStack item = Shop.config.getItemStack("Settings.PT." + key).clone();
                 if (item.hasItemMeta()) {
                     ItemMeta im = item.getItemMeta();
-                    im.setDisplayName(PlaceholderAPI.setPlaceholders(p, im.getDisplayName()));
+                    im.setDisplayName(PlaceholderUtils.applyPlaceholder(p, im.getDisplayName()));
                     List<String> lore = im.hasLore() ? im.getLore() : new ArrayList<>();
-                    im.setLore(PlaceholderAPI.setPlaceholders(p, lore));
+                    for (int i = 0; i < lore.size(); i++) {
+                        lore.set(i, PlaceholderUtils.applyPlaceholder(p, lore.get(i)));
+                    }
                     item.setItemMeta(im);
                 }
                 pt[Integer.parseInt(key)] = item;

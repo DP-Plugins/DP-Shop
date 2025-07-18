@@ -1,11 +1,12 @@
 name: DP-Shop
-version: 1.0.1.8
+version: 1.0.1.9
 main: com.darksoldier1404.dps.Shop
 authors: [ DEAD_POOLIO_ ]
 api-version: 1.14
 depend:
   - DPP-Core
   - Essentials
+softdepend:
   - PlaceholderAPI
 commands:
   dshop:
