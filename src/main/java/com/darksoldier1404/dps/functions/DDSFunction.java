@@ -191,6 +191,7 @@ public class DDSFunction {
         inv.setUsePageTools(true);
         inv.setPageTools(getPageTools(p));
         inv.setCurrentPage(prevPage);
+        inv.applyChanges();
         inv.update();
         p.openInventory(inv.getInventory());
         Shop.currentInv.put(p.getUniqueId(), inv);
@@ -239,6 +240,7 @@ public class DDSFunction {
 
     public static void updatePageTools(final DInventory inv, final Player p) {
         inv.setPageTools(getPageTools(p));
+        inv.applyChanges();
         inv.update();
     }
 
@@ -319,6 +321,7 @@ public class DDSFunction {
         inv.setUsePageTools(true);
         inv.setPageTools(getPageTools(p));
         inv.setCurrentPage(0);
+        inv.applyChanges();
         p.openInventory(inv.getInventory());
         Shop.currentInv.put(p.getUniqueId(), inv);
         updatePageTools(inv, p);
