@@ -1,3 +1,8 @@
+# Please do not use this plugin.
+# We are working on a new plugin.
+# Please wait a little while as we will make it possible to migrate existing data.
+
+
 ![](https://dpnw.site/assets/img/logo_white.png)
 
 ![](https://dpnw.site/assets/img/desc_card/dppcore.jpg)
